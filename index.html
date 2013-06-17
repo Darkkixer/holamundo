@@ -13,24 +13,18 @@ document.addEventListener("deviceready",onDeviceReady,
 false);
 }
 function onDeviceReady() {
+navigator.notification.alert("PhoneGap is ready!");
 
-
-function alertDismissed() {
-        // do something
+}
+ function playBeep() {
+        navigator.notification.beep(3);
     }
 
-    // Show a custom alertDismissed
+    // Vibrate for 2 seconds
     //
-    function showAlert() {
-        navigator.notification.alert(
-            'You are the winner!',  // message
-            alertDismissed,         // callback
-            'Game Over',            // title
-            'Done'                  // buttonName
-        );
+    function vibrate() {
+        navigator.notification.vibrate(2000);
     }
-
-navigator.notification.beep(2);
 
 
 </script>
