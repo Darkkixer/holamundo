@@ -14,7 +14,7 @@ false);
 }
 function onDeviceReady() {
 
-playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
+playAudio("file://MUSICA/ING 2/Echo.mp3");
         }
 
         // Un Reproductor de audio
@@ -63,10 +63,7 @@ playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
 
         // Detiene la reproducción
         // 
-        function stopAudio() {
-            if (my_media) {
-                my_media.stop();
-            }
+        
             clearInterval(mediaTimer);
             mediaTimer = null;
         }
@@ -95,9 +92,9 @@ playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
 
 </head>
 <body onload="onBodyLoad()">
-<a href="#" class="btn large" onclick="playAudio('http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3');">Reproducir</a>
+<a href="#" class="btn large" onclick="playAudio('file://MUSICA/ING 2/Echo.mp3');">Reproducir</a>
         <a href="#" class="btn large" onclick="pauseAudio();">Pausa</a>
-        <a href="#" class="btn large" onclick="stopAudio();">Detener</a>
+        
         <p id="audio_position"></p>
 
 </body>
