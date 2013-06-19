@@ -17,7 +17,7 @@ false);
 function onDeviceReady() {
 
 
-playAudio("file:///Sounds/love_rain.mp3");
+playAudio("file:///Sounds/");
         }
 
         // Un Reproductor de audio
@@ -109,7 +109,8 @@ navigator.notification.alert(
 
 </head>
 <body onload="onBodyLoad()">
-<a href="#" class="btn large" onclick="playAudio('love_rain.mp3');">Reproducir</a>
+
+<a href="#" class="btn large" onclick="playAudio('file:///Sounds/');">Reproducir</a>
         <a href="#" class="btn large" onclick="pauseAudio();">Pausa</a>
         
         <p id="audio_position"></p>
