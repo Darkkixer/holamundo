@@ -18,7 +18,12 @@ function onDeviceReady() {
 
 pictureSource=navigator.camera.PictureSourceType;
 destinationType=navigator.camera.DestinationType;
-playAudio("file:///Sounds/");
+
+document.addEventListener("menubutton", onMenuKeyDown, false);
+
+function onMenuKeyDown() {
+
+playAudio("file:///Sounds/love_rain.mp3");
         }
 
         // Un Reproductor de audio
