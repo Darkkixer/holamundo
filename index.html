@@ -1,20 +1,23 @@
- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-                          "http://www.w3.org/TR/html4/strict.dtd">
-    <html>
-      <head>
-        <title>Ejemplo de Media</title>
+  
+        
+ <!DOCTYPE html>
 
-        <script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
-        <script type="text/javascript" charset="utf-8">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;
+charset=utf-8">
+<meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 
-        // Espere a que PhoneGap se inicie
-        //
-        document.addEventListener("deviceready", onDeviceReady, false);
+<script type="text/javascript" charset="utf-8">
+function onBodyLoad() {
+document.addEventListener("deviceready",onDeviceReady,
+false);
+}
+function onDeviceReady() {
 
-        // PhoneGap esta listo
-        //
-        function onDeviceReady() {
-            playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
+
+playAudio("file:///Sounds/love_rain.mp3");
         }
 
         // Un Reproductor de audio
@@ -63,11 +66,8 @@
 
         // Detiene la reproducción
         // 
-        function stopAudio() {
-            if (my_media) {
-                my_media.stop();
-            }
-            clearInterval(mediaTimer);
+        
+            clearInterval(mediaTimer);{
             mediaTimer = null;
         }
 
@@ -89,33 +89,31 @@
         function setAudioPosition(position) {
             document.getElementById('audio_position').innerHTML = position;
         }
-        
-        function recordAudio() {
-    var src = "myrecording.mp3";
-    var mediaRec = new Media(src,
-        // Función 'callback' satisfactoria
-        function() {
-            console.log("recordAudio():Audio correcto");
-        },
 
-        // Función 'callback' de error
-        function(err) {
-            console.log("recordAudio():Audio Error: "+ err.code);
-        });
-
-    // Graba audio
-    mediaRec.startRecord();
+navigator.notification.alert("PhoneGap is ready!");{
+}
+function alertDismissed() {
+    // do something
 }
 
+navigator.notification.alert(
+    'You are the winner!',  // message
+    alertDismissed,         // callback
+    'Game Over',            // title
+    'Done'                  // buttonName
+);
 
-        </script>
-      </head>
-      <body>
-        <a href="#" class="btn large" onclick="playAudio('http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3');">Reproducir</a>
+
+
+</script>
+
+</head>
+<body onload="onBodyLoad()">
+<a href="#" class="btn large" onclick="playAudio('love_rain.mp3');">Reproducir</a>
         <a href="#" class="btn large" onclick="pauseAudio();">Pausa</a>
-        <a href="#" class="btn large" onclick="stopAudio();">Detener</a>
+        
         <p id="audio_position"></p>
-        <p id="media">Grabando audio...</p>
-    <p id="audio_position"></p>
-      </body>
-    </html>
+
+</body>
+</html>
+
