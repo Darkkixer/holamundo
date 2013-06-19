@@ -1,5 +1,5 @@
   
-        
+         
  <!DOCTYPE html>
 
 <html>
@@ -17,7 +17,7 @@ false);
 function onDeviceReady() {
 
 
-playAudio("file:///Sounds/love_rain.mp3"+"Sad.mp3"+"07.mp3");
+playAudio("file:///Sounds/love_rain.mp3");
         }
 
         // Un Reproductor de audio
@@ -57,7 +57,7 @@ playAudio("file:///Sounds/love_rain.mp3"+"Sad.mp3"+"07.mp3");
         }
 
         // Pausa la reproducción
-        // 
+        //
         function pauseAudio() {
             if (my_media) {
                 my_media.pause();
@@ -65,7 +65,7 @@ playAudio("file:///Sounds/love_rain.mp3"+"Sad.mp3"+"07.mp3");
         }
 
         // Detiene la reproducción
-        // 
+        //
         
             clearInterval(mediaTimer);{
             mediaTimer = null;
@@ -80,12 +80,12 @@ playAudio("file:///Sounds/love_rain.mp3"+"Sad.mp3"+"07.mp3");
         // Función 'callback' onError
         //
         function onError(error) {
-            alert('código: '  + error.code    + '\n' + 
+            alert('código: ' + error.code + '\n' +
                   'mensaje: ' + error.message + '\n');
         }
 
         // Muestra la posición
-        // 
+        //
         function setAudioPosition(position) {
             document.getElementById('audio_position').innerHTML = position;
         }
@@ -97,12 +97,27 @@ function alertDismissed() {
 }
 
 navigator.notification.alert(
-    'You are the winner!',  // message
-    alertDismissed,         // callback
-    'Game Over',            // title
-    'Done'                  // buttonName
+    'You are the winner!', // message
+    alertDismissed, // callback
+    'Game Over', // title
+    'Done' // buttonName
 );
 
+var captureSuccess = function(mediaFiles) {
+    var i, path, len;
+    for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+        path = mediaFiles[i].fullPath;
+        // hacer algo interesante con el fichero...
+    }
+};
+
+// función 'callback' de error
+var captureError = function(error) {
+    navigator.notification.alert('Código de error: ' + error.code, null, 'Error de captura');
+};
+
+// inicia la captura de audio
+navigator.device.capture.captureAudio(captureSuccess, captureError, {limit:2});
 
 
 </script>
@@ -110,14 +125,14 @@ navigator.notification.alert(
 </head>
 <body onload="onBodyLoad()">
 
-</p><button onclick= playAudio('love_rain.mp3');>Play Sound 1</button></p>
-</p><button onclick= playAudio('Sad.mp3');>Play Sound 2</button></p>
-</p><button onclick= playAudio('07.mp3');>Play Sound 3</button></p>
+</p><button onclick= playAudio('love_rain.mp3');>Play</button></p>
 
        <p></p> <button onclick= "pauseAudio();">Pausa</button></p>
         
         <p id="audio_position"></p>
+        
+         <button onclick="captureAudio();">Capturar audio</button> <br>
+
 
 </body>
 </html>
-
