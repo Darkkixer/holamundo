@@ -14,7 +14,7 @@ false);
 }
 function onDeviceReady() {
 
-playAudio("file:///android_asset/www/Sounds/love_rain.mp3");
+window.alert("Loading PhoneGap is completed");
         }
 
         // Un Reproductor de audio
@@ -24,78 +24,89 @@ playAudio("file:///android_asset/www/Sounds/love_rain.mp3");
 
         // Reproduce el audio
         //
-        function playAudio(src) {
-            if (my_media == null) {
-                // Crea un objeto `Media` desde el argumento
-                my_media = new Media(src, onSuccess, onError);
-            } // Si no, reproduce el actual
-            // Play audio
-            my_media.play();
+        function playAudio() {
+                var src = 'love_rain.mp3';
+             media = new Media (getPath() + src , onSuccess, onError);
 
-            // Actualiza la posición cada segundo
+            //Play the audio. You can set number of the replaying time here.
+            media.play({numberOfLoops:"infinite"});
+
             if (mediaTimer == null) {
+
                 mediaTimer = setInterval(function() {
-                    // Obtiene la posición actual
-                    my_media.getCurrentPosition(
-                        // Función 'callback' satisfactoria
+
+                    // Return a current playback position
+                    media.getCurrentPosition(
+
+                        //A Callback function if it's success
                         function(position) {
                             if (position > -1) {
-                                setAudioPosition((position) + " seg");
+                                setAudioPosition((position) + " sec");
+                                             
+                                        //If the playback stops at "-0.001" position, replay the audio.
+                                        if(position == -0.001){
+
+                                            media.play({numberOfLoops:"infinite"});
+            
+                                        }
                             }
                         },
-                        // Función 'callback' de error
+                        //A callback function in case of failure
                         function(e) {
-                            console.log("Error obteniendo posición=" + e);
+
+                            console.log("Error getting pos=" + e);
                             setAudioPosition("Error: " + e);
+
                         }
                     );
                 }, 1000);
             }
         }
 
-        // Pausa la reproducción
-        // 
         function pauseAudio() {
-            if (my_media) {
-                my_media.pause();
+
+            if (media) {
+                media.pause();
             }
         }
 
-        // Detiene la reproducción
-        // 
-        
+        function stopAudio() {
+
+            if (media) {
+                media.stop();
+            }
+
             clearInterval(mediaTimer);
             mediaTimer = null;
         }
 
-        // Función 'callback' onSuccess
-        //
-        function onSuccess() {
-            console.log("playAudio():Audio Correcto");
-        }
+          //A success callback function displaying a success message.
+          function onSuccess() {
+              console.log("playAudio():Audio Success");
+          }
 
-        // Función 'callback' onError
-        //
-        function onError(error) {
-            alert('código: '  + error.code    + '\n' + 
-                  'mensaje: ' + error.message + '\n');
-        }
+          //A callback function in case of failure
+          function onError(error) {
+              alert('code: '    + error.code    + '\n' + 
+                    'message: ' + error.message + '\n');
+          }
 
-        // Muestra la posición
-        // 
-        function setAudioPosition(position) {
-            document.getElementById('audio_position').innerHTML = position;
-        }
+          //Set the position of audio playback
+          function setAudioPosition(position) {
+              document.getElementById('audio_position').innerHTML = position;
+          }
 
+          </script>
+        </head>
+      <body>
+      <h1>Play music with PhoneGap</h1>
+        <a href="#" class="btn large" onclick="playAudio();">Play the music</a><br/><br/><br/>
 
-</script>
+        <a href="#" class="btn large" onclick="pauseAudio();">Pause the music</a><br/><br/><br/>
 
-</head>
-<body onload="onBodyLoad()">
-<a href="#" class="btn large" onclick="playAudio('love_rain.mp3');">Reproducir</a>
-        <a href="#" class="btn large" onclick="pauseAudio();">Pausa</a>
-        
-        <p id="audio_position"></p>
+        <a href="#" class="btn large" onclick="stopAudio();">Stop the music</a><br/><br/><br/>
 
+        <p id="audio_position"></p><br/>
+       
 </body>
 </html>
